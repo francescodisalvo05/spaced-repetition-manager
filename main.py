@@ -8,10 +8,9 @@ def main():
 
     parser = ArgumentParser()
 
-    parser.add_argument('-c', '--chapter', type=str, help='Select the chapter', required=True)
+    parser.add_argument('-c', '--chapter', type=str, help='Select the chapter. Otherwise it will be randomly selected', default=None)
     parser.add_argument('-n', '--num_extractions', type=int, default=1, help='Select the number of extractions')
     # clean the session
-    # work with a default chapter -> take than a random one
 
     parsed_args = parser.parse_args()
 
@@ -26,6 +25,12 @@ def main():
 
     # check if num_extractions is greater than 1
     num_extractions = max(1,num_extractions)
+
+    # check the chapter
+    # if it is still None (no input) it will be randomly chosen
+    if not chapter:
+        random_chapter_idx = random.randint(0,len(chapters)-1)
+        chapter = list(chapters)[random_chapter_idx]
 
     if chapter in chapters:
 
