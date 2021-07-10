@@ -10,23 +10,25 @@ def main():
 
     parser.add_argument('-c', '--chapter', type=str, help='Select the chapter. Otherwise it will be randomly selected', default=None)
     parser.add_argument('-n', '--num_extractions', type=int, default=1, help='Select the number of extractions')
-
-    parser.add_argument('-i', '--index', type=str, default='index.json', help='Select the path to the index')
-    # clean the session
-
+    parser.add_argument('-i', '--index', type=str, default='indices/index.json', help='Select the path to the index')
+    parser.add_argument('-s', '--session', type=str, default=None, help='Select the path to the session')
     parsed_args = parser.parse_args()
 
+    chapter = parsed_args.chapter
+    num_extractions = parsed_args.num_extractions
+    index = parsed_args.index
+    session = parsed_args.session
+
     # read the index file
-    with open('indices/index.json') as handle:
+    with open(index) as handle:
         dict = json.loads(handle.read())
 
     chapters = dict.keys()
 
-    chapter = parsed_args.chapter
-    num_extractions = parsed_args.num_extractions
-
     # check if num_extractions is greater than 1
     num_extractions = max(1,num_extractions)
+
+
 
     # check the chapter
     # if it is still None (no input) it will be randomly chosen
