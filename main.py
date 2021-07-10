@@ -10,12 +10,14 @@ def main():
 
     parser.add_argument('-c', '--chapter', type=str, help='Select the chapter. Otherwise it will be randomly selected', default=None)
     parser.add_argument('-n', '--num_extractions', type=int, default=1, help='Select the number of extractions')
+
+    parser.add_argument('-i', '--index', type=str, default='index.json', help='Select the path to the index')
     # clean the session
 
     parsed_args = parser.parse_args()
 
     # read the index file
-    with open('index.json') as handle:
+    with open('indices/index.json') as handle:
         dict = json.loads(handle.read())
 
     chapters = dict.keys()
