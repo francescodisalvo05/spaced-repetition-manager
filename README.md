@@ -35,4 +35,22 @@ Anytime you run the script, this file will be updated. It allows you to keep tra
 }
 ```
 
+## How to run
 
+The arguments that you can use are:
+* --chapter \<CHAPTER-TO-REVIEW\> (default=None -> it will be randomly chosen)
+* --num_extractions \<NUMBER-OF-QUESTIONS\> (default=1)
+* --index \<PATH-TO-INDEX-FILE\> **
+* --session \<PATH-TO-SESSION-FILE\> (default=None -> it will be created after the first run **)
+
+\*\* I suggest you set as "default" the files that you are going to use 
+
+### Example
+```
+python main.py --index indices/index.json --session progresses/session-index.json --chapter 5 --num_extractions 2
+```
+
+Output: 
+```
+Tell me from chapter 5 >> 15 14
+```
