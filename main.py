@@ -3,13 +3,10 @@ import random
 
 from argparse import ArgumentParser
 
-from collections import defaultdict
+from utils import get_dict_session
 
 
-def defaultify(d):
-    if not isinstance(d, dict):
-        return d
-    return defaultdict(lambda: None, {k: defaultify(v) for k, v in d.items()})
+
 
 def main():
 
@@ -28,28 +25,19 @@ def main():
 
     # read the index file
     with open(index) as handle:
-        dict = json.loads(handle.read())
+        dict_index = json.loads(handle.read())
 
-    chapters = dict.keys()
+    chapters = dict_index.keys()
 
     # check if num_extractions is greater than 1
     num_extractions = max(1,num_extractions)
 
+    # get the exhisting session or create a new one
+    dict_session = get_dict_session(session)
 
-    # get or create the session -> transform it as a function
-    dict_session = {}
-    if not session:
-
-        for k, v in dict.items():
-            dict_session[k] = {}
-
-    else:
-        # read from the json file
-        with open(session) as handle:
-            dict_session = json.loads(handle.read())
 
     # check the chapter
-    # if it is still None (no input) it will be randomly chosen
+    # -- if it is still None (no input) it will be randomly chosen
     if not chapter:
         random_chapter_idx = random.randint(0,len(chapters)-1)
         chapter = list(chapters)[random_chapter_idx]
@@ -59,7 +47,7 @@ def main():
         print(f"Tell me from chapter {chapter}" + " >> ", end="")
 
         for i in range(num_extractions):
-            extracted = random.randint(1,dict[chapter])
+            extracted = random.randint(1,dict_index[chapter])
             print(extracted, end=" ")
 
             if not extracted in dict_session[chapter].keys():
