@@ -1,7 +1,6 @@
-# active-recall-ctmli
-Simple python script for doing active recall on "Cracking The Machine Learning Interview" 
+# :loudspeaker: Active Recall Manager
 
-Ideas : 
-* use an hidden list (for me) with the text of the question
-* in order to avoid repeated question, use a temporary list with all the extracted questions per session (for each chapter)
-* use as a consequence an argument for clearing the session (deleting the file)
+Doing spaced repetition is considered one of the most fruitful study technique. It consists on spacying out our studying schedule, in particular, by introducing time intervals between study sessions, you can remember more. That's because you try to "tackle" and to smooth the forgetting curve. 
+There are plenty of resources online, these ones are just a few:
+* How to Remember More of What You Learn with Spaced Repetition [(link)](https://collegeinfogeek.com/spaced-repetition-memory-technique/)
+* How to Study for Exams - Spaced Repetition | Evidence-based revision tips [(link)](https://www.youtube.com/watch?v=Z-zNHHpXoMM)
