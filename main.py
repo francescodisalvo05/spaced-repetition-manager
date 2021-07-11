@@ -35,22 +35,18 @@ def main():
     # check if num_extractions is greater than 1
     num_extractions = max(1,num_extractions)
 
-    # get or create the session
-    if not session:
-        # >> INITIALIZE BY USING ALL THE INDICES OF INDEX.JSON
-        # >> IN THIS WAY IT WON'T HAVE ANY PROBLEM FOR THE FUTURE UPDATES
-        dict_session = defaultdict(lambda: defaultdict(int))
-    else:
 
+    # get or create the session -> transform it as a function
+    dict_session = {}
+    if not session:
+
+        for k, v in dict.items():
+            dict_session[k] = {}
+
+    else:
         # read from the json file
         with open(session) as handle:
-            temp_dict = json.loads(handle.read())
-            print(temp_dict)
-            print(defaultify(temp_dict))
-            #
-            #  SWIITCH TO NORMAL DICTS
-            #
-
+            dict_session = json.loads(handle.read())
 
     # check the chapter
     # if it is still None (no input) it will be randomly chosen
@@ -64,25 +60,19 @@ def main():
 
         for i in range(num_extractions):
             extracted = random.randint(1,dict[chapter])
-            dict_session[chapter][extracted] += 1
             print(extracted, end=" ")
 
+            if not extracted in dict_session[chapter].keys():
+                dict_session[chapter][extracted] = 1
+            else:
+                dict_session[chapter][extracted] += 1
+
         with open(f"progresses/session-{index.split('/')[1]}", "w") as outfile:
-            json.dump(dict_session, indent=2)
+            json.dump(dict_session, outfile, indent=2)
 
     else:
         print("Wrong chapter")
 
 
 if __name__ == '__main__':
-    # main()
-
-    with open('progresses/session-index.json') as handle:
-        temp_dict = json.loads(handle.read())
-
-    print(temp_dict)
-    d = defaultify(temp_dict)
-    print(d)
-    d['6.1.7']['9'] += 1
-
-    print("\d",d)
+    main()
